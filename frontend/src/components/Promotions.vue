@@ -186,7 +186,7 @@ export default {
     },
 
     startCountdown() {
-      this.saleEndAt = new Date(2025, 9, 10, 12, 0, 0).getTime();
+      this.saleEndAt = new Date(2025, 9, 20, 12, 0, 0).getTime();
 
       // Run lần đầu rồi bắt interval
       this.updateCountdown();

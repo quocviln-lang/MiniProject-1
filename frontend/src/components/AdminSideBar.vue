@@ -32,6 +32,14 @@
       📊 Sản phẩm bán chạy
     </router-link>
 
+    <router-link
+  to="/admin/feedbacks"
+  class="sidebar-item"
+  :class="{ active: active === 'feedback' }"
+>
+  💬 Phản hồi khách hàng
+</router-link>
+
     <!-- Sau này có thể thêm mục khác ở đây -->
   </nav>
 </template>

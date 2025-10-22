@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar">
     <!-- Logo -->
-    <router-link to="/" class="logo">📱 PhoneShop</router-link>
+    <router-link to="/ad" class="logo"><img src="/logoweb2.png" alt="PhoneShop Logo" class="logo-img" /></router-link>
 
     <!-- Menu chính -->
     <ul class="nav-links">
@@ -451,4 +451,16 @@ search() {
 .btn-logout:hover {
   background: #cc0000;
 }
+.logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.logo-img {
+  height: 45px;
+  width: auto;
+  object-fit: contain;
+}
+
 </style>

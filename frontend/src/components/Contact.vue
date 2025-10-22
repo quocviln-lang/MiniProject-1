@@ -28,9 +28,23 @@
     <section class="form-section">
       <h2>✍️ Gửi tin nhắn cho chúng tôi</h2>
       <form @submit.prevent="submitForm">
-        <input type="text" placeholder="Họ và tên" v-model="form.name" required />
-        <input type="email" placeholder="Email của bạn" v-model="form.email" required />
-        <textarea placeholder="Nội dung tin nhắn" v-model="form.message" required></textarea>
+        <input
+          type="text"
+          placeholder="Họ và tên"
+          v-model="form.name"
+          required
+        />
+        <input
+          type="email"
+          placeholder="Email của bạn"
+          v-model="form.email"
+          required
+        />
+        <textarea
+          placeholder="Nội dung tin nhắn"
+          v-model="form.message"
+          required
+        ></textarea>
         <button type="submit">Gửi ngay 🚀</button>
       </form>
     </section>
@@ -70,11 +84,37 @@ export default {
     };
   },
   methods: {
-    submitForm() {
-      alert(
-        `Cảm ơn ${this.form.name}, chúng tôi sẽ phản hồi qua email: ${this.form.email}`
-      );
-      this.form = { name: "", email: "", message: "" };
+    async submitForm() {
+      if (!this.form.name || !this.form.email || !this.form.message) {
+        alert("Vui lòng nhập đầy đủ thông tin trước khi gửi!");
+        return;
+      }
+
+      try {
+        console.log("📨 Đang gửi dữ liệu:", this.form);
+
+        const res = await fetch("http://localhost:5000/api/feedbacks", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(this.form),
+        });
+
+        console.log("📡 Phản hồi server:", res.status, res.statusText);
+
+        if (res.ok) {
+          alert(
+            `✅ Cảm ơn ${this.form.name}, chúng tôi sẽ phản hồi qua email: ${this.form.email}`
+          );
+          this.form = { name: "", email: "", message: "" };
+        } else {
+          const errText = await res.text();
+          console.error("❌ Phản hồi lỗi:", errText);
+          alert("Đã xảy ra lỗi khi gửi tin nhắn! (Xem console để biết chi tiết)");
+        }
+      } catch (err) {
+        console.error("🚫 Lỗi kết nối máy chủ:", err);
+        alert("Không thể kết nối tới máy chủ. Vui lòng kiểm tra backend!");
+      }
     },
   },
 };
@@ -174,13 +214,5 @@ export default {
 }
 .form-section button:hover {
   background: #e65c00;
-}
-
-.map-section {
-  margin-top: 40px;
-}
-.map-section h2 {
-  text-align: center;
-  margin-bottom: 15px;
 }
 </style>

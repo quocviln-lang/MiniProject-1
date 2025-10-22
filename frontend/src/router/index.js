@@ -64,6 +64,10 @@ const routes = [
   { path: "/review", name: "Review", component: Review },
   { path: "/admin/potential-customers",name: "AdminPotentialCustomers",component: () => import("../components/AdminPotentialCustomers.vue"),},
   { path: "/admin/top-products",name: "AdminTopProducts",component: () => import("../components/AdminTopProducts.vue"),},
+  { path: "/admin/feedbacks",name: "AdminFeedback",component: () => import("../components/AdminFeedback.vue"),},
+  { path: "/ad", name: "AdVideoPage", component: () => import("../components/AdVideoPage.vue"),},
+
+
 ,
 ];
 

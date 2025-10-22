@@ -56,7 +56,7 @@ export default {
         window.location.reload();
       });
     } else {
-      this.$router.push("/").then(() => {
+      this.$router.push("/ad").then(() => {
         window.location.reload();
       });
     }
